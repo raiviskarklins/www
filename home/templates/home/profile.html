@@ -1,0 +1,57 @@
+{% extends 'home/base.html' %}
+{% block home_active %}active{% endblock %}
+{% block title %} - Profile {% endblock %}
+{% block sidebar %}{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">{{ user.last_name }}
+				<small>{{ user.first_name }}</small>
+			</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			<img class="img-responsive" src="{{ user.profile.picture.url }}" alt="{{ user.first_name }} {{ user.last_name }}" style="max-height:500px; border:1px solid black;">
+		</div>
+		<div class="col-md-4">
+			<h3>Details</h3>
+			<h4><small>Last login: {{ user.last_login }}</small></h4>
+			<p>Date of birth: {{ user.profile.date_of_birth }}</p>
+			<p>Gender: {{ user.profile.sex }}</p>
+			<p>Occupation: {{ user.profile.occupation }}</p>
+			{% if user.profile.show_email %}
+			<p>E-mail: {{ user.email }}</p>
+			{% endif %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-10">
+			<h3>Bio</h3>
+			<p class="fulljustify">{{ user.profile.bio }}</p>
+		</div>
+		<div class="col-lg-12">
+			<h3 class="page-header">Created blogs</h3>
+		</div>
+		{% for blog in user.blog_set.all %}
+		<div class="col-sm-5 col-lg-5 col-md-5">
+			<div class="thumbnail">
+				<img src="{{ blog.picture.url }}" alt="{{ blog.title }}" style="max-width:300px;max-height:150px; min-height: 150px">
+				<div class="caption">
+					<h4 class="fulljustify"><a href="{% url 'home:blog'  blog.id %}">{{ blog.title }}</a>
+					</h4>
+					<p class="fulljustify">{{ blog.text }} </p>
+				</div>
+				<div>
+					<p>
+						<span><a href="{% url 'home:blog' blog.id %}" class="btn btn-primary btn-sm" role="button">View</a></span>
+					</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<hr>
+</div>
+{% endblock %}

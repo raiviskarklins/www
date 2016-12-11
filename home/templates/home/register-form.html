@@ -1,0 +1,46 @@
+{% extends 'home/base.html' %}
+{% block title %} - Register{% endblock %}
+{% block login_active %}active{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block body %}
+<div class="col-sm-8 col-md-8">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h3>Register for an Account</h3>
+			{% if error_message %}
+			<p><strong>{{ error_message }}</strong></p>
+			{% endif %}
+			<form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				{% include 'home/form-template.html' %}
+
+                <div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+		<span class="text-danger small"></span>
+	</div>
+	<label class="control-label col-sm-2"><label for="id_date_of_birth">Date of birth:</label></label>
+	<div class="col-sm-10"><input id="id_date_of_birth" maxlength="10" name="date_of_birth" type="date" max="{% now "Y-m-j" %}" min="1900-01-01" required /></div>
+</div>
+
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-success">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="panel-footer">
+			Already have an account? <a href="{% url 'home:login' %}">Click here</a> to log in.
+		</div>
+	</div>
+</div>
+<div class="col-sm-4 col-md-4">
+	<div class="panel panel-default">
+		<div class="panel-body fulljustify">
+			<h3>What is WebLogSpace?</h3>
+			<p><strong>WebLogSpace is a user based online blog, where registered users can write blogs for the rest of the people to read. If you are not registered you can still read articles, but some functionality may be limited.</strong></p>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'home/base.html'%}
+{% block title %}{% endblock %}
+{% block home_active %}active{% endblock %}
+{% block body %}
+<div class="col-md-9">
+	{% if not search %}
+	{% include 'home/commercial.html' %}
+	{% endif %}
+	<div class="row">
+		{% if search %}
+		<div class="col-sm-12">
+			<h3>Search results</h3>
+		</div>
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Title</th>
+								<th>Author</th>
+								<th>View</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% endif %}
+							{% for blog in blogs %}
+							{% if not search %}
+							<div class="col-sm-4 col-lg-4 col-md-4">
+								<div class="thumbnail">
+									<img src="{{ blog.picture.url }}" alt="{{ blog.title }}" style="max-width:300px;max-height:150px; min-height: 150px">
+									<div class="caption">
+										<h4 class="fulljustify"><a href="{% url 'home:blog'  blog.id %}">{{ blog.title }}</a>
+										</h4>
+										<p class="fulljustify">{{ blog.text }} </p>
+									</div>
+									<div class="blog-info">
+										<p class="pull-right"><span><a href="{% url 'home:blog' blog.id %}" class="btn btn-primary btn-sm" role="button">View</a></span></p>
+										<p>
+											{% if user.is_authenticated %}
+											<span><a href="{% url 'home:profile' blog.author.id %}">{{ blog.author.first_name }} {{ blog.author.last_name }}</a></span><br>
+											{% else %}
+											<span>{{ blog.author.first_name }} {{ blog.author.last_name }}</span><br>
+											{% endif %}
+											<span>{{ blog.date_created }}</span>
+										</p>
+									</div>
+								</div>
+							</div>
+							{% else %}
+							<tr>
+								<td>{{ blog.title }}</td>
+								{% if user.is_authenticated %}
+								<td><a href="{% url 'home:profile' blog.author.id %}"> {{ blog.author.first_name }} {{ blog.author.last_name }}</a></td>
+								{% else %}
+								<td>{{ blog.author.first_name }} {{ blog.author.last_name }}</td>
+								{% endif %}
+								<td>
+									<a href="{% url 'home:blog' blog.id %}" class="btn btn-primary btn-sm" role="button">View Blog</a>
+								</td>
+							</tr>
+							{% endif %}
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

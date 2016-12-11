@@ -1,0 +1,56 @@
+{% extends 'home/base.html' %}
+{% block title %} - {{ blog.title }} {% endblock %}
+{% block home_active %}active{% endblock %}
+{% block body %}
+<div class="col-md-9">
+	<div class="thumbnail">
+		<img class="img-responsive" src="{{ blog.picture.url }}" alt="{{ blog.title }}"style="max-height:500px;">
+		<div class="caption-full">
+			<h1>{{ blog.title }}</h1>
+			<p id="tagline" class="fulljustify">{{ blog.text }}</p>
+		</div>
+		<div class="ratings">
+			<p class="pull-right">{{ blog.date_created }}</p>
+			<p>
+				{% if user.is_authenticated %}
+				<span><a href="{% url 'home:profile' blog.author.id %}">{{ blog.author.first_name }} {{ blog.author.last_name }}</a></span><br>
+				<span></span>
+				{% else %}
+				<span>{{ blog.author.first_name }} {{ blog.author.last_name }}</span><br>
+				<span></span>
+				{% endif %}
+			</p>
+		</div>
+	</div>
+	<div class="well">
+		{% if user.is_authenticated %}
+            {% if not just_created %}
+		<div class="text-right">
+			<form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<span class="text-danger small"></span>
+					</div>
+					<label class="control-label col-sm-2"><label for="id_title">Comment:</label></label>
+					<div class="col-sm-10"><textarea rows="4" class="form-control" id="id_text" maxlength="10000" name="text" type="text" required></textarea></div>
+				</div>
+				<button type="submit" class="btn btn-success">Leave a Comment</button>
+			</form>
+		</div>
+                {% endif %}
+		{% endif %}
+		<hr>
+		{% for comment in blog.comment_set.all %}
+		<div class="row">
+			<div class="col-md-12">
+				<strong> {{ comment.author.first_name }} {{ comment.author.last_name }}</strong>
+				<span class="pull-right"><strong>{{ comment.date_created }}</strong></span>
+				<p>{{ comment.text }}</p>
+			</div>
+		</div>
+		<hr>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

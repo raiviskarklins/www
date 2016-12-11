@@ -1,0 +1,72 @@
+/* atstatījums no augšas un fona krāsa*/
+body {
+    padding-top: 70px;
+    background-color: #e9ebee;
+}
+/* nomaina fontu Bootstrap klasei */
+.navbar-brand{
+    font-family: 'Satisfy', cursive;
+}
+/* izmērs ir dinamisks*/
+.slide-image {
+    width: 100%;
+}
+/* atkāpe no apakšas*/
+.carousel-holder {
+    margin-bottom: 30px;
+}
+/* izveido rāmi ap šīm klasēm*/
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+/*  definē augstumu un nerāda scroll bāru*/
+.caption {
+    height: 130px;
+    overflow: hidden;
+}
+/* klasei un pakārtotam img tagam nosaka dinamisku izmēru*/
+.thumbnail img {
+    width: 100%;
+}
+/* uzliek atstatījumu no labās un kreisās puses un nodefinē krāsu*/
+.blog-info {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+/* noņem atstatījumu */
+.thumbnail {
+    padding: 0;
+}
+/* klasei un pakārtotai klasei nosaka krāsu un atstatījumu*/
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+/*  kājenes atstatījumu nosaka*/
+footer {
+    margin: 50px 0;
+}
+/*  izlīdzina tekstu*/
+.fulljustify {
+    text-align:justify;
+}
+/* nodefinē kā inline bloku ar dinamisku izmēru*/
+.fulljustify:after {
+    display: inline-block;
+    width: 100%;
+}
+/* neļauj mainīt izmēru manuāli*/
+textarea {
+    resize: none;
+}
+/* nosaka teksta izlīdzinājumu un platumu tabulas šūnā*/
+td{
+    vertical-align: bottom;
+    width: 150px;
+}
+/* nosaka tabulas rindas augstumu*/
+tr{
+    height: 35px;
+}
