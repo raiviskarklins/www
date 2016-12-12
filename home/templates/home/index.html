@@ -17,8 +17,7 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th>Title</th>
-								<th>Author</th>
+								<th>Title</th>					
 								<th>View</th>
 							</tr>
 						</thead>
@@ -50,11 +49,6 @@
 							{% else %}
 							<tr>
 								<td>{{ blog.title }}</td>
-								{% if user.is_authenticated %}
-								<td><a href="{% url 'home:profile' blog.author.id %}"> {{ blog.author.first_name }} {{ blog.author.last_name }}</a></td>
-								{% else %}
-								<td>{{ blog.author.first_name }} {{ blog.author.last_name }}</td>
-								{% endif %}
 								<td>
 									<a href="{% url 'home:blog' blog.id %}" class="btn btn-primary btn-sm" role="button">View Blog</a>
 								</td>

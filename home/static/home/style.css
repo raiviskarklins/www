@@ -62,11 +62,11 @@ textarea {
     resize: none;
 }
 /* nosaka teksta izlīdzinājumu un platumu tabulas šūnā*/
-td{
+.profile td{
     vertical-align: bottom;
     width: 150px;
 }
 /* nosaka tabulas rindas augstumu*/
-tr{
+.profile tr{
     height: 35px;
 }
